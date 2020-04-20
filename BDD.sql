@@ -15,6 +15,7 @@ INSERT INTO Musique ( nom_musique, nom_artiste, album, annee_publication) Values
 ('another one bite the dust', 'Queen', 'The game', '1980-09-22'), 
 ('JCVD', 'Jul','Rien 100 rien', '2020-06-14'), 
 ('crazy frog', 'Daniel Malmedahl','','2005-07-23'); 
+('comichou', 'sandrine et amaury', '','1998-06-19');
  
  
  
