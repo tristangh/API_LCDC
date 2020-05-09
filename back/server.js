@@ -5,6 +5,7 @@ var port = process.env.PORT || 8080;
 var app = express();
 var cors = require('cors');
 
+//init
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
