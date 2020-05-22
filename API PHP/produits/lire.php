@@ -33,12 +33,11 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
             extract($row);
 
             $prod = [
-                "id" => $id,
-                "nom" => $nom,
-                "description" => $description,
-                "prix" => $prix,
-                "categories_id" => $categories_id,
-                "categories_nom" => $categories_nom
+                "nom_musique" => $nom_musique,
+                "nom_artiste" => $nom_artiste,
+                "album" => $album,
+                "annee_publication" => $annee_publication,
+                
             ];
 
             $tableauProduits['produits'][] = $prod;

@@ -22,13 +22,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     // On récupère les informations envoyées
     $donnees = json_decode(file_get_contents("php://input"));
     
-    if(!empty($donnees->nom) && !empty($donnees->description) && !empty($donnees->prix) && !empty($donnees->categories_id)){
+    if(!empty($donnees->nom_musique) && !empty($donnees->nom_artiste) && !empty($donnees->album) && !empty($donnees->annee_publication)){
         // Ici on a reçu les données
         // On hydrate notre objet
-        $produit->nom = $donnees->nom;
-        $produit->description = $donnees->description;
-        $produit->prix = $donnees->prix;
-        $produit->categories_id = $donnees->categories_id;
+        $produit->nom_musique = $donnees->nom_musique;
+        $produit->nom_artiste = $donnees->nom_artiste;
+        $produit->album = $donnees->album;
+        $produit->annee_publication = $donnees->annee_publication;
 
         if($produit->creer()){
             // Ici la création a fonctionné

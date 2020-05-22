@@ -31,12 +31,11 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         if($produit->nom != null){
 
             $prod = [
-                "id" => $produit->id,
-                "nom" => $produit->nom,
-                "description" => $produit->description,
-                "prix" => $produit->prix,
-                "categories_id" => $produit->categories_id,
-                "categories_nom" => $produit->categories_nom
+                "nom_musique" => $produit->nom_musique,
+                "nom_artiste" => $produit->nom_artiste,
+                "album" => $produit->album,
+                "annee_publication" => $produit->annee_publication,
+                
             ];
             // On envoie le code réponse 200 OK
             http_response_code(200);

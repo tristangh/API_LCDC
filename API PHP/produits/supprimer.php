@@ -22,8 +22,8 @@ if($_SERVER['REQUEST_METHOD'] == 'DELETE'){
     // On récupère l'id du produit
     $donnees = json_decode(file_get_contents("php://input"));
 
-    if(!empty($donnees->id)){
-        $produit->id = $donnees->id;
+    if(!empty($donnees->nom_musique)){
+        $produit->nom_musique = $donnees->nom_musique;
 
         if($produit->supprimer()){
             // Ici la suppression a fonctionné
