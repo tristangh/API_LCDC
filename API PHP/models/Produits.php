@@ -46,11 +46,12 @@ class Produits{
     public function creer(){
 
         // Ecriture de la requête SQL en y insérant le nom de la table
-        $sql = "INSERT INTO musique SET SET nom_musique=:nom_musique, nom_artiste=:nom_artiste, album=:album, annee_publication=:annee_publication";
+        $sql = "INSERT INTO  " . $this->table . " SET nom_musique=:nom_musique, nom_artiste=:nom_artiste, album=:album, annee_publication=:annee_publication";
 
         // Préparation de la requête
         $query = $this->connexion->prepare($sql);
 
+                // Protection contre les injections
         $this->nom_musique=htmlspecialchars(strip_tags($this->nom_musique));
         $this->nom_artiste=htmlspecialchars(strip_tags($this->nom_artiste));
         $this->album=htmlspecialchars(strip_tags($this->album));
