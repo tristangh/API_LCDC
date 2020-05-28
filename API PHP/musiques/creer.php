@@ -10,14 +10,14 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     // On inclut les fichiers de configuration et d'accès aux données
     include_once '../config/Database.php';
-    include_once '../models/Produits.php';
+    include_once '../models/Musiques.php';
 
     // On instancie la base de données
     $database = new Database();
     $db = $database->getConnection();
 
-    // On instancie les produits
-    $produit = new Produits($db);
+    // On instancie les musiques
+    $musique = new Musiques($db);
 
     // On récupère les informations envoyées
     $donnees = json_decode(file_get_contents("php://input"));
@@ -25,12 +25,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if(!empty($donnees->nom_musique) && !empty($donnees->nom_artiste) && !empty($donnees->album) && !empty($donnees->annee_publication)){
         // Ici on a reçu les données
         // On hydrate notre objet
-        $produit->nom_musique = $donnees->nom_musique;
-        $produit->nom_artiste = $donnees->nom_artiste;
-        $produit->album = $donnees->album;
-        $produit->annee_publication = $donnees->annee_publication;
+        $musique->nom_musique = $donnees->nom_musique;
+        $musique->nom_artiste = $donnees->nom_artiste;
+        $musique->album = $donnees->album;
+        $musique->annee_publication = $donnees->annee_publication;
 
-        if($produit->creer()){
+        if($musique->creer()){
             // Ici la création a fonctionné
             // On envoie un code 201
             http_response_code(201);

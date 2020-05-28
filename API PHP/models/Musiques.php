@@ -1,5 +1,5 @@
 <?php
-class Produits{
+class Musiques{
     // Connexion
     private $connexion;
     private $table = "musique";
@@ -20,7 +20,7 @@ class Produits{
     }
 
     /**
-     * Lecture des produits
+     * Lecture des musiques
      *
      * @return void
      */
@@ -39,7 +39,7 @@ class Produits{
     }
 
     /**
-     * Créer un produit
+     * Créer une musique
      *
      * @return void
      */
@@ -71,7 +71,7 @@ class Produits{
     }
 
     /**
-     * Lire un produit
+     * Lire un musique
      *
      * @return void
      */
@@ -99,7 +99,7 @@ class Produits{
     }
 
     /**
-     * Supprimer un produit
+     * Supprimer un musique
      *
      * @return void
      */
@@ -125,7 +125,7 @@ class Produits{
     }
 
     /**
-     * Mettre à jour un produit
+     * Mettre à jour un musique
      *
      * @return void
      */

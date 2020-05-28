@@ -10,29 +10,29 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 if($_SERVER['REQUEST_METHOD'] == 'GET'){
     // On inclut les fichiers de configuration et d'accès aux données
     include_once '../config/Database.php';
-    include_once '../models/Produits.php';
+    include_once '../models/Musiques.php';
 
     // On instancie la base de données
     $database = new Database();
     $db = $database->getConnection();
 
-    // On instancie les produits
-    $produit = new Produits($db);
+    // On instancie les musiques
+    $musique = new Musiques($db);
 
     // On récupère les données
-    $stmt = $produit->lire();
+    $stmt = $musique->lire();
 
-    // On vérifie si on a au moins 1 produit
+    // On vérifie si on a au moins 1 musique
     if($stmt->rowCount() > 0){
         // On initialise un tableau associatif
         $tableauProduits = [];
-        $tableauProduits['produits'] = [];
+        $tableauProduits['musiques'] = [];
 
-        // On parcourt les produits
+        // On parcourt les musiques
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
             extract($row);
 
-            $prod = [
+            $m = [
                 "nom_musique" => $nom_musique,
                 "nom_artiste" => $nom_artiste,
                 "album" => $album,
@@ -40,7 +40,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
                 
             ];
 
-            $tableauProduits['produits'][] = $prod;
+            $tableauProduits['musiques'][] = $m;
         }
 
         // On envoie le code réponse 200 OK

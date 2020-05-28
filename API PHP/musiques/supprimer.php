@@ -10,22 +10,22 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 if($_SERVER['REQUEST_METHOD'] == 'DELETE'){
     // On inclut les fichiers de configuration et d'accès aux données
     include_once '../config/Database.php';
-    include_once '../models/Produits.php';
+    include_once '../models/Musiques.php';
 
     // On instancie la base de données
     $database = new Database();
     $db = $database->getConnection();
 
-    // On instancie les produits
-    $produit = new Produits($db);
+    // On instancie les musiques
+    $musique = new Musiques($db);
 
-    // On récupère l'id du produit
+    // On récupère l'id du musique
     $donnees = json_decode(file_get_contents("php://input"));
 
     if(!empty($donnees->nom_musique)){
-        $produit->nom_musique = $donnees->nom_musique;
+        $musique->nom_musique = $donnees->nom_musique;
 
-        if($produit->supprimer()){
+        if($musique->supprimer()){
             // Ici la suppression a fonctionné
             // On envoie un code 200
             http_response_code(200);

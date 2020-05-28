@@ -10,43 +10,43 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 if($_SERVER['REQUEST_METHOD'] == 'GET'){
     // On inclut les fichiers de configuration et d'accès aux données
     include_once '../config/Database.php';
-    include_once '../models/Produits.php';
+    include_once '../models/Musiques.php';
 
     // On instancie la base de données
     $database = new Database();
     $db = $database->getConnection();
 
-    // On instancie les produits
-    $produit = new Produits($db);
+    // On instancie les musiques
+    $musique = new Musiques($db);
 
     $donnees = json_decode(file_get_contents("php://input"));
 
     if(!empty($donnees->nom_musique)){
-        $produit->nom_musique = $donnees->nom_musique;
+        $musique->nom_musique = $donnees->nom_musique;
 
-        // On récupère le produit
-        $produit->lireUn();
+        // On récupère le musique
+        $musique->lireUn();
 
-        // On vérifie si le produit existe
-        if($produit->nom_musique!= null){
+        // On vérifie si le musique existe
+        if($musique->nom_musique!= null){
 
-            $prod = [
-                "nom_musique" => $produit->nom_musique,
-                "nom_artiste" => $produit->nom_artiste,
-                "album" => $produit->album,
-                "annee_publication" => $produit->annee_publication,
+            $m = [
+                "nom_musique" => $musique->nom_musique,
+                "nom_artiste" => $musique->nom_artiste,
+                "album" => $musique->album,
+                "annee_publication" => $musique->annee_publication,
                 
             ];
             // On envoie le code réponse 200 OK
             http_response_code(200);
 
             // On encode en json et on envoie
-            echo json_encode($prod);
+            echo json_encode($m);
         }else{
             // 404 Not found
             http_response_code(404);
          
-            echo json_encode(array("message" => "Le produit n'existe pas."));
+            echo json_encode(array("message" => "Le musique n'existe pas."));
         }
         
     }
