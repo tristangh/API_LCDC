@@ -9,6 +9,7 @@ class Musiques{
     public $nom_artiste;
     public $album;
     public $annee_publication;
+    public $tableauMusiques;
 
     /**
      * Constructeur avec $db pour la connexion à la base de données
@@ -96,6 +97,53 @@ class Musiques{
         $this->album = $row['album'];
         $this->annee_publication = $row['annee_publication'];
     }
+
+
+        /**
+     * Chercher une musique par l'un de ses attributs
+     *
+     * @return void
+     */
+    public function lireParArtiste(){
+        // Ecriture de la requete
+        $sql = "SELECT * FROM musique WHERE nom_artiste = ? ";
+
+        // Preparation de la requete
+        $query = $this->connexion->prepare( $sql );
+
+        // Recherche par id (ici nom_musique)
+        $query->bindParam(1, $this->nom_artiste);
+
+        // Exécution
+        $query->execute();
+
+        //$row = $query->fetch(PDO::FETCH_ASSOC);
+
+        // $this->nom_musique = $row['nom_musique'];
+        // $this->nom_artiste = $row['nom_artiste'];
+        // $this->album = $row['album'];
+        // $this->annee_publication = $row['annee_publication'];
+
+        
+
+        // On parcourt les musiques par artiste
+        while($row = $query->fetch(PDO::FETCH_ASSOC)){
+            extract($row);
+
+            $m = [
+                "nom_musique" => $nom_musique,
+                "nom_artiste" => $nom_artiste,
+                "album" => $album,
+                "annee_publication" => $annee_publication,
+                
+            ];
+
+            $this->tableauMusiques['musiques'][] = $m;
+        }
+
+    }
+
+
 
     /**
      * Supprimer un musique

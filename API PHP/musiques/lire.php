@@ -25,8 +25,8 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     // On vérifie si on a au moins 1 musique
     if($stmt->rowCount() > 0){
         // On initialise un tableau associatif
-        $tableauProduits = [];
-        $tableauProduits['musiques'] = [];
+        $tableauMusiques = [];
+        $tableauMusiques['musiques'] = [];
 
         // On parcourt les musiques
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
@@ -40,14 +40,14 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
                 
             ];
 
-            $tableauProduits['musiques'][] = $m;
+            $tableauMusiques['musiques'][] = $m;
         }
 
         // On envoie le code réponse 200 OK
         http_response_code(200);
 
         // On encode en json et on envoie
-        echo json_encode($tableauProduits);
+        echo json_encode($tableauMusiques);
     }
 
 }else{

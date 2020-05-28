@@ -21,8 +21,8 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
 
     $donnees = json_decode(file_get_contents("php://input"));
 
-    if(!empty($donnees->nom_musique)){
-        $musique->nom_musique = $donnees->nom_musique;
+    if(!empty($donnees->mot_clef)){
+        $musique->nom_musique = $donnees->mot_clef;
 
         // On récupère la musique
         $musique->lireUn();
@@ -43,12 +43,32 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
             // On encode en json et on envoie
             echo json_encode($m);
         }else{
+            $musique->nom_artiste = $donnees->mot_clef;
+            $musique->lireParArtiste();
+
+            if($musique->tableauMusiques!= null){
+
+                $m = [
+                    "nom_musique" => $musique->nom_musique,
+                    "nom_artiste" => $musique->nom_artiste,
+                    "album" => $musique->album,
+                    "annee_publication" => $musique->annee_publication,
+                    
+                ];
+                // On envoie le code réponse 200 OK
+                http_response_code(200);
+    
+                // On encode en json et on envoie
+                //echo json_encode($m);
+                echo json_encode($musique->tableauMusiques);
+
+            }else{
             // 404 Not found
             http_response_code(404);
          
             echo json_encode(array("message" => "La musique n'existe pas."));
+            }
         }
-        
     }
 }else{
     // On gère l'erreur
