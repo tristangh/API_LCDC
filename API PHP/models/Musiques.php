@@ -4,7 +4,7 @@ class Musiques{
     private $connexion;
     private $table = "musique";
 
-    // object properties
+    // propriétés
     public $nom_musique;
     public $nom_artiste;
     public $album;
@@ -25,16 +25,16 @@ class Musiques{
      * @return void
      */
     public function lire(){
-        // On écrit la requête
+        // Ecriture de la requete
         $sql = "SELECT * FROM  musique";
 
-        // On prépare la requête
+        // Preparation de la requete
         $query = $this->connexion->prepare($sql);
 
-        // On exécute la requête
+        // Execution
         $query->execute();
 
-        // On retourne le résultat
+        // Retour du résultat
         return $query;
     }
 
@@ -51,19 +51,19 @@ class Musiques{
         // Préparation de la requête
         $query = $this->connexion->prepare($sql);
 
-                // Protection contre les injections
+        // Protection classique contre les injections
         $this->nom_musique=htmlspecialchars(strip_tags($this->nom_musique));
         $this->nom_artiste=htmlspecialchars(strip_tags($this->nom_artiste));
         $this->album=htmlspecialchars(strip_tags($this->album));
         $this->annee_publication=htmlspecialchars(strip_tags($this->annee_publication));
 
-        # Ajout des données protégées
+        // Ajout des données protégées
         $query->bindParam(":nom_musique", $this->nom_musique);
         $query->bindParam(":nom_artiste", $this->nom_artiste);
         $query->bindParam(":album", $this->album);
         $query->bindParam(":annee_publication", $this->annee_publication);
 
-        // Exécution de la requête
+        // Exécution
         if($query->execute()){
             return true;
         }
@@ -71,27 +71,26 @@ class Musiques{
     }
 
     /**
-     * Lire un musique
+     * Lire une musique
      *
      * @return void
      */
     public function lireUn(){
-        // On écrit la requête
+        // Ecriture de la requete
         $sql = "SELECT * FROM musique WHERE nom_musique = ? ";
 
-        // On prépare la requête
+        // Preparation de la requete
         $query = $this->connexion->prepare( $sql );
 
-        // On attache l'id
+        // Recherche par id (ici nom_musique)
         $query->bindParam(1, $this->nom_musique);
 
-        // On exécute la requête
+        // Exécution
         $query->execute();
 
-        // on récupère la ligne
+        // Récupération de la ligne
         $row = $query->fetch(PDO::FETCH_ASSOC);
 
-        // On hydrate l'objet
         $this->nom_musique = $row['nom_musique'];
         $this->nom_artiste = $row['nom_artiste'];
         $this->album = $row['album'];
@@ -104,10 +103,10 @@ class Musiques{
      * @return void
      */
     public function supprimer(){
-        // On écrit la requête
+        // Ecriture de la requete
         $sql = "DELETE FROM musique WHERE nom_musique = ?";
 
-        // On prépare la requête
+        // Preparation de la requete
         $query = $this->connexion->prepare( $sql );
 
         // On sécurise les données
@@ -130,25 +129,25 @@ class Musiques{
      * @return void
      */
     public function modifier(){
-        // On écrit la requête
+        // Ecriture de la requete
         $sql = "UPDATE " . $this->table . " SET nom_musique = :nom_musique, nom_artiste = :nom_artiste, album = :album, annee_publication = :annee_publication WHERE nom_musique = :nom_musique";
         
-        // On prépare la requête
+        // Preparation de la requete
         $query = $this->connexion->prepare($sql);
         
-        // On sécurise les données
+        // Protection classique contre les injections
         $this->nom_musique=htmlspecialchars(strip_tags($this->nom_musique));
         $this->nom_artiste=htmlspecialchars(strip_tags($this->nom_artiste));
         $this->album=htmlspecialchars(strip_tags($this->album));
         $this->annee_publication=htmlspecialchars(strip_tags($this->annee_publication));
         
-        // On attache les variables
+        // Ajout des données protégées
         $query->bindParam(':nom_musique', $this->nom_musique);
         $query->bindParam(':nom_artiste', $this->nom_artiste);
         $query->bindParam(':album', $this->album);
         $query->bindParam(':annee_publication', $this->annee_publication);
         
-        // On exécute
+        // Exécution
         if($query->execute()){
             return true;
         }
