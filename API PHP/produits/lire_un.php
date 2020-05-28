@@ -21,14 +21,14 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
 
     $donnees = json_decode(file_get_contents("php://input"));
 
-    if(!empty($donnees->id)){
-        $produit->id = $donnees->id;
+    if(!empty($donnees->nom_musique)){
+        $produit->nom_musique = $donnees->nom_musique;
 
         // On récupère le produit
         $produit->lireUn();
 
         // On vérifie si le produit existe
-        if($produit->nom != null){
+        if($produit->nom_musique!= null){
 
             $prod = [
                 "nom_musique" => $produit->nom_musique,
